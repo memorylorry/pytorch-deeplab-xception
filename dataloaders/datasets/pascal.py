@@ -103,6 +103,44 @@ class VOCSegmentation(Dataset):
     def __str__(self):
         return 'VOC2012(split=' + str(self.split) + ')'
 
+    @staticmethod
+    def fill_colormap(image):
+        assert len(image.shape) == 2 # and image.shape[2] == 1
+        label_colors = [[0, 0, 0],
+                            [128, 0, 0],
+                            [0, 128, 0],
+                            [128, 128, 0],
+                            [0, 0, 128],
+                            [128, 0, 128],
+                            [0, 128, 128],
+                            [128, 128, 128],
+                            [64, 0, 0],
+                            [192, 0, 0],
+                            [64, 128, 0],
+                            [192, 128, 0],
+                            [64, 0, 128],
+                            [192, 0, 128],
+                            [64, 128, 128],
+                            [192, 128, 128],
+                            [0, 64, 0],
+                            [128, 64, 0],
+                            [0, 192, 0],
+                            [128, 192, 0],
+                            [0, 64, 128]]
+
+        r = np.zeros_like(image).astype(np.uint8)
+        g = np.zeros_like(image).astype(np.uint8)
+        b = np.zeros_like(image).astype(np.uint8)
+
+        for l in range(0, len(label_colors)):
+            idx = image == l
+            r[idx] = label_colors[l][0]
+            g[idx] = label_colors[l][1]
+            b[idx] = label_colors[l][2]
+
+        rgb = np.stack([r, g, b], axis=2)
+        return rgb
+
 
 if __name__ == '__main__':
     from dataloaders.utils import decode_segmap
