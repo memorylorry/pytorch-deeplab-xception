@@ -4,6 +4,11 @@
 
 **Update on 2018/11/24. Release newest version code, which fix some previous issues and also add support for new backbones and multi-gpu training. For previous code, please see in `previous` branch**  
 
+
+### 相应论文 ： [Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation](https://arxiv.org/pdf/1802.02611v3.pdf)
+![arch](./assets/arch.png)
+
+
 ### TODO
 - [x] Support different backbones
 - [x] Support VOC, SBD, Cityscapes and COCO datasets
